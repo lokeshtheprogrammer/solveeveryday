@@ -1,0 +1,94 @@
+# 🔁 Left Rotate Array
+
+## 🧠 Problem
+
+Given an array `arr[]` of size `n`, rotate the array to the **left by `d` positions**.
+
+---
+
+## 📌 Example
+
+```
+Input:  arr = [1,2,3,4,5,6], d = 2
+Output: [3,4,5,6,1,2]
+```
+
+```
+Input:  arr = [1,2,3], d = 4
+Output: [2,3,1]
+```
+
+---
+
+## 🧠 Approach (Human Thinking)
+
+1. If we rotate more than array size → it repeats
+   So reduce:
+
+   ```
+   d = d % n
+   ```
+
+2. Split array into two parts:
+
+   * First `d` elements
+   * Remaining elements
+
+3. Join them:
+
+   ```
+   result = right_part + left_part
+   ```
+
+---
+
+## 💻 Code (Simple Method)
+
+```python
+def leftRotate(arr, d):
+    n = len(arr)
+    
+    # Step 1: handle large d
+    d = d % n
+    
+    # Step 2: rotate
+    return arr[d:] + arr[:d]
+
+
+# Example usage
+arr = [1, 2, 3, 4, 5, 6]
+d = 2
+print(leftRotate(arr, d))
+```
+
+---
+
+## 🔍 Dry Run
+
+```
+arr = [1,2,3,4,5,6], d = 2
+
+arr[d:]  → [3,4,5,6]
+arr[:d]  → [1,2]
+
+Result   → [3,4,5,6,1,2]
+```
+
+---
+
+## ⚡ Complexity
+
+* Time: O(n)
+* Space: O(n)
+
+---
+
+## 🚀 Bonus (Interview Level)
+
+👉 In-place rotation (no extra space) uses **reverse technique**:
+
+1. Reverse first `d`
+2. Reverse remaining
+3. Reverse whole array
+
+---
