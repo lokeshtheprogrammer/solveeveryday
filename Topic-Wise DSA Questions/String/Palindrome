@@ -1,0 +1,110 @@
+# 🔁 Check Palindrome String
+
+## 🧠 Problem
+
+Check whether a given string is a **palindrome** (same forward and backward).
+
+---
+
+## 📌 Example
+
+```id="eg1"
+Input: "madam"  
+Output: True
+```
+
+```id="eg2"
+Input: "hello"  
+Output: False
+```
+
+---
+
+## 🧠 Approach (Simple Thinking)
+
+1. Compare string with its reverse
+2. If both are same → palindrome
+3. Else → not palindrome
+
+---
+
+## 💻 Code (Simple Method)
+
+```python id="code1"
+class Solution:
+    def isPalindrome(self, s: str) -> bool:
+        return s == s[::-1]
+
+
+# Example usage
+s = "madam"
+print(Solution().isPalindrome(s))
+```
+
+---
+
+## 💻 Code (Two Pointer - Interview Approach)
+
+```python id="code2"
+class Solution:
+    def isPalindrome(self, s: str) -> bool:
+        left = 0
+        right = len(s) - 1
+
+        while left < right:
+            if s[left] != s[right]:
+                return False
+            left += 1
+            right -= 1
+
+        return True
+
+
+# Example usage
+s = "abba"
+print(Solution().isPalindrome(s))
+```
+
+---
+
+## 🔍 Dry Run
+
+```id="dry"
+s = "abba"
+
+Compare:
+a == a ✔  
+b == b ✔  
+
+Result → True
+```
+
+---
+
+## ⚡ Complexity
+
+* Time: O(n)
+* Space:
+
+  * Reverse method → O(n)
+  * Two pointer → O(1)
+
+---
+
+## 🎯 Pattern
+
+* String reversal
+* Two pointers
+
+---
+
+## 🚀 Next Upgrade
+
+👉 Ignore spaces + case:
+
+```id="upgrade"
+Input: "I am IronnorI Ma"  
+Output: True
+```
+
+---
