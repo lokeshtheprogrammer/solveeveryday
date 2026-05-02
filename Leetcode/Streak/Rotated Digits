@@ -1,0 +1,91 @@
+🟢 Step 1: Understand the problem
+
+We need to check numbers from 1 to n
+
+A number is GOOD if:
+
+All digits are valid after rotation
+AND the number becomes different
+🔁 Step 2: Understand digit behavior
+Valid but SAME → 0, 1, 8
+Valid and CHANGE → 2, 5, 6, 9
+INVALID → 3, 4, 7
+🟡 Step 3: Idea (Think simply)
+
+For each number:
+
+Check every digit
+If any digit is invalid → skip number
+If at least one digit changes → mark as GOOD
+🧾 Step 4: Plan (like writing on paper)
+count = 0
+
+for every number from 1 to n:
+    valid = True
+    changed = False
+
+    check each digit:
+        if digit is 3,4,7:
+            valid = False
+            stop checking
+
+        if digit is 2,5,6,9:
+            changed = True
+
+    if valid AND changed:
+        count += 1
+
+return count
+💡 Step 5: Why this works
+We filter invalid numbers
+We ensure at least one digit changes
+So final number is different and valid
+💻 Final Code (Beginner Friendly)
+class Solution:
+    def rotatedDigits(self, n: int) -> int:
+        count = 0
+
+        for num in range(1, n + 1):
+            valid = True
+            changed = False
+
+            for digit in str(num):
+                if digit in '347':   # invalid digits
+                    valid = False
+                    break
+                if digit in '2569':  # digits that change
+                    changed = True
+
+            if valid and changed:
+                count += 1
+
+        return count
+🔍 Example (n = 10)
+1 → same → ❌
+2 → becomes 5 → ✅
+3 → invalid → ❌
+4 → invalid → ❌
+5 → becomes 2 → ✅
+6 → becomes 9 → ✅
+7 → invalid → ❌
+8 → same → ❌
+9 → becomes 6 → ✅
+10 → same → ❌
+
+👉 Answer = 4
+
+⚡ Complexity (simple)
+Loop → n times
+Each number → few digits
+
+👉 Total ≈ O(n log n)
+
+🎯 Final Pattern
+
+👉 Digit Checking + Flags
+
+Used in:
+
+Confusing Number
+Valid Number Problems
+Digit transformation problems
