@@ -1,0 +1,208 @@
+
+# 🧠 1. What is a Trie? (Simple Understanding)
+
+👉 Think like this:
+
+You are building a **dictionary app** 📱
+Words like:
+
+```
+apple
+app
+bat
+```
+
+Instead of storing full words again and again,
+we store **character by character in a tree**.
+
+👉 This is called a **Trie (Prefix Tree)**
+
+* Each node = 1 character
+* Path from root → forms a word ([GeeksforGeeks][1])
+
+---
+
+# 🌳 2. Structure of Trie
+
+Each node contains:
+
+* children → next characters
+* isEnd → tells if word ends here
+
+Example:
+
+```
+       root
+      /    \
+     a      b
+    /        \
+   p          a
+  /            \
+ p              t
+ |
+ l
+ |
+ e
+```
+
+👉 `"app"` ends at second `p`
+👉 `"apple"` ends at `e`
+
+---
+
+# 🔥 3. Operations in Problem
+
+From GFG:
+
+* insert(word)
+* search(word)
+* isPrefix(word) ([GeeksforGeeks][2])
+
+---
+
+# ✍️ 4. INSERT (Human Thinking)
+
+👉 Example: insert("apple")
+
+Steps:
+
+1. Start from root
+2. For each character:
+
+   * If not present → create node
+   * Move to next node
+3. At last character → mark `isEnd = True`
+
+👉 Why?
+Because Trie stores **each character separately** ([GeeksforGeeks][3])
+
+---
+
+# 🔍 5. SEARCH (Human Thinking)
+
+👉 Example: search("app")
+
+Steps:
+
+1. Start from root
+2. For each character:
+
+   * If not found → return False
+3. After loop:
+
+   * Check `isEnd == True`
+
+👉 Important:
+
+* "app" and "apple" are different
+
+---
+
+# 🔎 6. PREFIX CHECK
+
+👉 Example: isPrefix("app")
+
+Steps:
+
+1. Traverse characters
+2. If path exists → True
+   (No need to check `isEnd`)
+
+---
+
+# 💡 7. Key Insight
+
+* Trie works in **O(length of word)**
+* Faster than brute search in many cases ([GeeksforGeeks][4])
+
+---
+
+# 💻 8. FINAL CODE (GFG Python Ready)
+
+```python
+class TrieNode:
+    def __init__(self):
+        self.children = {}
+        self.isEnd = False
+
+
+class Trie:
+    def __init__(self):
+        self.root = TrieNode()
+
+    # Insert word
+    def insert(self, word):
+        node = self.root
+
+        for ch in word:
+            if ch not in node.children:
+                node.children[ch] = TrieNode()
+            node = node.children[ch]
+
+        node.isEnd = True
+
+    # Search full word
+    def search(self, word):
+        node = self.root
+
+        for ch in word:
+            if ch not in node.children:
+                return False
+            node = node.children[ch]
+
+        return node.isEnd
+
+    # Check prefix
+    def isPrefix(self, word):
+        node = self.root
+
+        for ch in word:
+            if ch not in node.children:
+                return False
+            node = node.children[ch]
+
+        return True
+```
+
+---
+
+# 🔍 9. Dry Run (Very Important)
+
+Insert:
+
+```
+insert("app")
+insert("apple")
+```
+
+Search:
+
+```
+search("app") → True
+search("ap") → False
+isPrefix("ap") → True
+```
+
+---
+
+# ⚡ 10. Complexity
+
+* Insert → O(L)
+* Search → O(L)
+* Prefix → O(L)
+
+(L = length of word)
+
+---
+
+# 🎯 11. Pattern Takeaway
+
+👉 This is:
+
+* **Tree + String problem**
+* Used in:
+
+  * Autocomplete
+  * Search engines
+  * Dictionaries
+
